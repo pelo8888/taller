@@ -1,0 +1,24 @@
+{
+  "name": "taller",
+  "version": "1.0.0",
+  "description": "Sitio web del taller Revegna",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://pelo88@bitbucket.org/tallerrevenga/web-taller.git"
+  },
+  "keywords": [
+    "Taller",
+    "PowerChips",
+    "Reprogramacion",
+    "Electronica"
+  ],
+  "author": "afontes",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
