@@ -1,0 +1,17 @@
+
+RewriteEngine on
+
+DirectoryIndex index_dev.html
+
+# Start A2 Switcher Block
+# Do not remove or modify this block! Added by PHP Switcher from cPanel to use an alternate PHP version. Contact Support for details.
+<IfModule mod_suphp.c>
+  AddHandler application/x-httpd-php-5.5.0 .php
+</IfModule>
+# End A2 Switcher Block
+
+ErrorDocument 404 /index_dev.html
+RewriteCond %{HTTP_HOST} ^tinydevelop\.com\.uy$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.tinydevelop\.com\.uy$
+RewriteRule ^/?$ "http\:\/\/www\.tinydev\-source\.com\/" [R=301,L]
+
