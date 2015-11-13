@@ -4,7 +4,7 @@
   app.controller('RecomendedController', function($scope, $http) {
     this.products = recomended;
 
-    $http.get('json/recomended.json')
+    $http.get('json/recomendados.json')
       .then(function(res) {
         $scope.todos = res.data;
       });
