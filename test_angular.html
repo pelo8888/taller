@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--[if IE 8]>      <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>      <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html ng-app="pelo"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <title>Taller Revenga</title>
+  <meta name="keywords" content="Autos, Camiones, Taller, Power Chips" />
+  <meta name="description" content="Autos, Camiones, Taller, Power Chips" />
+  <meta name="Author" content="pelo8888@gmail.com" />
+  <!-- mobile settings -->
+  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <!-- WEB FONTS : use %7C instead of | (pipe) -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+  <!-- CORE CSS -->
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- LAYER SLIDER -->
+  <link href="assets/plugins/slider.layerslider/css/layerslider.css" rel="stylesheet" type="text/css" />
+  <!-- THEME CSS -->
+  <link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+  <!-- PAGE LEVEL SCRIPTS -->
+  <link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+<!--   // <script type="text/javascript" src="assets/plugins/angular.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.4.7/angular-animate.min.js"></script>
+
+
+</head>
+
+
+<body class="smoothscroll enable-animation" ng-app="ngAnimate">
+  <div id="wrapper">
+    <div id="header" class="sticky shadow-after-3 clearfix">
+      <!-- TOP NAV -->
+      <header id="topNav">
+        <div class="container">
+          <!-- Mobile Menu Button -->
+          <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+          <i class="fa fa-bars"></i>
+          </button>
+          <!-- BUTTONS -->
+          <ul class="pull-right nav nav-pills nav-second-main">
+            <!-- QUICK SHOP CART -->
+            <li class="quick-cart">
+              <a href="#">
+                <span class="badge badge-aqua btn-xs badge-corner">2</span>
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              <div class="quick-cart-box">
+                <h4>Carrito de compras</h4>
+                <div class="quick-cart-wrapper">
+                  <a href="#"><!-- cart item -->
+                  <img src="images/shop/products/300x450/halogen/pr1.jpg" width="45" height="45" alt="" />
+                  <h6><span>2x</span> Lamparas - Halogena 12v 55w H7 X-treme Power Vision</h6>
+                  <small>$550.00</small>
+                  </a><!-- /cart item -->
+                  <a href="#"><!-- cart item -->
+                  <img src="images/shop/products/300x450/limpieza/1.jpg" width="45" height="45" alt="" />
+                  <h6><span>1x</span> Limpieza Y Acabado - Cera Autobrillo Gatillo 650cc Revigal</h6>
+                  <small>$188.10</small>
+                  </a><!-- /cart item -->
+                  <!-- cart no items example -->
+                  <!--
+                  <a class="text-center" href="#">
+                      <h6>0 ITEMS ON YOUR CART</h6>
+                  </a>
+                  -->
+                </div>
+                <!-- quick cart footer -->
+                <div class="quick-cart-footer clearfix">
+                  <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
+                  <span class="pull-left"><strong>TOTAL:</strong> $1288.10</span>
+                </div>
+                <!-- /quick cart footer -->
+              </div>
+            </li>
+            <!-- /QUICK SHOP CART -->
+          </ul>
+          <!-- /BUTTONS -->
+          <!-- Logo -->
+          <a class="logo pull-left" href="index.html">
+            <img src="images/logos/logochico.png" alt="" />
+          </a>
+          <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+            <nav class="nav-main">
+              <ul id="topMain" class="nav nav-pills nav-main">
+                <li class="active">
+                  <a href="#inicio">INICIO</a>
+                </li>
+
+                <li>
+                  <a href="#empresa">EMPRESA</a>
+                </li>
+
+                <li>
+                  <a  href="#servicios">SERVICIOS</a>
+                </li>
+
+                <li>
+                  <a href="#powerchips">POWER CHIPS</a>
+                </li>
+
+                <li>
+                  <a href="#shop">SHOP</a>
+                </li>
+
+                <li>
+                  <a href="#contacto">CONTACTO</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+  </header>
+<!-- /Top Nav -->
+</div>
+
+
+
+
+
+  <!-- RECOMMENDED -->
+  <section id="shop">
+
+    <div class="container">
+      <h2 class="owl-featured"><strong>Recomendados</strong> para ti:</h2>
+      <div class="owl-carousel featured nomargin owl-padding-10"
+          data-plugin-options='{
+          "singleItem": false,
+          "stopOnHover":false,
+          "autoPlay":4000,
+          "autoHeight": false,
+          "navigation": true,
+          "pagination": false
+          }'
+          ng-controller="RecomendedController as recomended">
+        <div class="shop-item nomargin" ng-repeat="product in recomended.products | filter:q as results">
+          <div class="thumbnail">
+            <a class="shop-item-image" href="#">
+              <div class="owl-carousel owl-padding-0 nomargin"
+                data-plugin-options='{
+                  "singleItem": true,
+                  "autoPlay": 3000,
+                  "navigation": false,
+                  "pagination": false,
+                  "transitionStyle":"fadeUp"
+                }'>
+                <img class="img-responsive" ng-src="{{product.images[0]}}" alt="shop first image" />
+              </div>
+            </a>
+          </div>
+
+          <div class="shop-item-summary text-center">
+            <h2>{{product.description}}</h2>
+            <div class="shop-item-price">$ {{product.price}}</div>
+          </div>
+
+          <div class="shop-item-buttons text-center">
+            <a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JAVASCRIPT FILES -->
+  <script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+  <script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="assets/js/scripts.js"></script>
+  <!-- LAYER SLIDER -->
+  <script type="text/javascript" src="assets/plugins/slider.layerslider/js/layerslider_pack.js"></script>
+  <script type="text/javascript" src="assets/js/view/demo.layerslider_slider.js"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
+</body>
+</html>
