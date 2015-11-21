@@ -2,7 +2,7 @@
 <!--[if IE 8]>      <html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>      <html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->  <html ng-app="pelo"> <!--<![endif]-->
-<head>
+<head class="toastr-notify">
   <meta charset="utf-8" />
   <title>Taller Revenga</title>
   <meta name="keywords" content="Autos, Camiones, Taller, Power Chips" />
@@ -42,26 +42,24 @@
           <i class="fa fa-bars"></i>
           </button>
           <!-- BUTTONS -->
-          <ul class="pull-right nav nav-pills nav-second-main">
+          <ul class="pull-right nav nav-pills nav-second-main" ng-controller="QuickCartController">
             <!-- QUICK SHOP CART -->
             <li class="quick-cart">
               <a href="#">
-                <span class="badge badge-aqua btn-xs badge-corner">2</span>
+                <span class="badge badge-aqua btn-xs badge-corner">{{ getLength() }}</span>
                 <i class="fa fa-shopping-cart"></i>
               </a>
               <div class="quick-cart-box">
                 <h4>Carrito de compras</h4>
                 <div class="quick-cart-wrapper">
-                  <a href="#"><!-- cart item -->
-                  <img src="images/shop/products/300x450/halogen/pr1.jpg" width="45" height="45" alt="" />
-                  <h6><span>2x</span> Lamparas - Halogena 12v 55w H7 X-treme Power Vision</h6>
-                  <small>$550.00</small>
-                  </a><!-- /cart item -->
-                  <a href="#"><!-- cart item -->
-                  <img src="images/shop/products/300x450/limpieza/1.jpg" width="45" height="45" alt="" />
-                  <h6><span>1x</span> Limpieza Y Acabado - Cera Autobrillo Gatillo 650cc Revigal</h6>
-                  <small>$188.10</small>
-                  </a><!-- /cart item -->
+
+                  <div ng-repeat="product in carrito">
+                    <a href="#"><!-- cart item -->
+                    <img src="{{product.images[0]}}" width="45" height="45" alt="" />
+                    <h6><span>{{product.count}} x</span> {{product.description}}</h6>
+                    <small>${{product.price}}</small>
+                    </a>
+                  </div>
                   <!-- cart no items example -->
                   <!--
                   <a class="text-center" href="#">
@@ -72,7 +70,7 @@
                 <!-- quick cart footer -->
                 <div class="quick-cart-footer clearfix">
                   <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
-                  <span class="pull-left"><strong>TOTAL:</strong> $1288.10</span>
+                  <span class="pull-left"><strong>TOTAL:</strong> $ {{getTotal()}}</span>
                 </div>
                 <!-- /quick cart footer -->
               </div>
@@ -118,10 +116,6 @@
 <!-- /Top Nav -->
 </div>
 
-
-
-
-
   <!-- RECOMMENDED -->
   <section id="shop">
 
@@ -136,8 +130,8 @@
           "navigation": true,
           "pagination": false
           }'
-          ng-controller="RecomendedController as recomended">
-        <div class="shop-item nomargin" ng-repeat="product in recomended.products | filter:q as results">
+          ng-controller="RecomendedController as controller">
+        <div class="shop-item nomargin" ng-repeat="product in recomendados">
           <div class="thumbnail">
             <a class="shop-item-image" href="#">
               <div class="owl-carousel owl-padding-0 nomargin"
@@ -148,7 +142,7 @@
                   "pagination": false,
                   "transitionStyle":"fadeUp"
                 }'>
-                <img class="img-responsive" ng-src="{{product.images[0]}}" alt="shop first image" />
+                <img class="img-responsive" src="{{product.images[0]}}" alt="shop first image" />
               </div>
             </a>
           </div>
@@ -159,7 +153,7 @@
           </div>
 
           <div class="shop-item-buttons text-center">
-            <a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
+            <a class="btn btn-default" ng-click="addToCart(product)"><i class="fa fa-cart-plus"></i> Agregar</a>
           </div>
         </div>
       </div>
@@ -171,8 +165,11 @@
   <script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="assets/js/scripts.js"></script>
   <!-- LAYER SLIDER -->
+  <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="assets/plugins/slider.layerslider/js/layerslider_pack.js"></script>
   <script type="text/javascript" src="assets/js/view/demo.layerslider_slider.js"></script>
+  <script type="text/javascript" src="assets/js/revenga.js"></script>
   <script type="text/javascript" src="assets/js/app.js"></script>
 </body>
 </html>
