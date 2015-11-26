@@ -1,80 +1,73 @@
 <!DOCTYPE html>
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
-<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
-<head>
+<!--[if gt IE 9]><!-->	<html ng-app="taller"> <!--<![endif]-->
+<head class="toastr-notify">
 	<meta charset="utf-8" />
 	<title>Taller Revenga</title>
 	<meta name="keywords" content="Autos, Camiones, Taller, Power Chips" />
 	<meta name="description" content="Autos, Camiones, Taller, Power Chips" />
 	<meta name="Author" content="pelo8888@gmail.com" />
-	<!-- mobile settings -->
 	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<!-- WEB FONTS : use %7C instead of | (pipe) -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
-	<!-- CORE CSS -->
 	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<!-- LAYER SLIDER -->
 	<link href="assets/plugins/slider.layerslider/css/layerslider.css" rel="stylesheet" type="text/css" />
-	<!-- THEME CSS -->
 	<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
-	<!-- PAGE LEVEL SCRIPTS -->
 	<link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
 </head>
 
-
 <body class="smoothscroll enable-animation">
 	<div id="wrapper">
 		<div id="header" class="sticky shadow-after-3 clearfix">
-			<!-- TOP NAV -->
+
 			<header id="topNav">
 				<div class="container">
-					<!-- Mobile Menu Button -->
 					<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
 					<i class="fa fa-bars"></i>
 					</button>
-					<!-- BUTTONS -->
-					<ul class="pull-right nav nav-pills nav-second-main">
-						<!-- QUICK SHOP CART -->
-						<li class="quick-cart">
-							<a href="#">
-								<span class="badge badge-aqua btn-xs badge-corner">2</span>
-								<i class="fa fa-shopping-cart"></i>
-							</a>
-							<div class="quick-cart-box">
-								<h4>Carrito de compras</h4>
-								<div class="quick-cart-wrapper">
-									<a href="#"><!-- cart item -->
-									<img src="images/shop/products/300x450/halogen/pr1.jpg" width="45" height="45" alt="" />
-									<h6><span>2x</span> Lamparas - Halogena 12v 55w H7 X-treme Power Vision</h6>
-									<small>$550.00</small>
-									</a><!-- /cart item -->
-									<a href="#"><!-- cart item -->
-									<img src="images/shop/products/300x450/limpieza/1.jpg" width="45" height="45" alt="" />
-									<h6><span>1x</span> Limpieza Y Acabado - Cera Autobrillo Gatillo 650cc Revigal</h6>
-									<small>$188.10</small>
-									</a><!-- /cart item -->
-									<!-- cart no items example -->
-									<!--
-									<a class="text-center" href="#">
-											<h6>0 ITEMS ON YOUR CART</h6>
-									</a>
-									-->
-								</div>
-								<!-- quick cart footer -->
-								<div class="quick-cart-footer clearfix">
-									<a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
-									<span class="pull-left"><strong>TOTAL:</strong> $1288.10</span>
-								</div>
-								<!-- /quick cart footer -->
-							</div>
-						</li>
-						<!-- /QUICK SHOP CART -->
-					</ul>
-					<!-- /BUTTONS -->
+
+<!-- QUICK SHOP CART -->
+          <ul class="pull-right nav nav-pills nav-second-main" ng-controller="QuickCartController">
+            <li class="quick-cart">
+
+              <a href="#">
+                <span class="badge badge-aqua btn-xs badge-corner">{{ getLength() }}</span>
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+
+              <div class="quick-cart-box">
+                <h4>Carrito de compras</h4>
+                <div class="quick-cart-wrapper">
+
+                  <div ng-repeat="product in carrito">
+                    <a href="#"><!-- cart item -->
+                    <img src="{{product.images[0]}}" width="45" height="45" alt="" />
+                    <h6><span>{{product.count}} x</span> {{product.description}}</h6>
+                    <small>${{product.price}}</small>
+                    </a>
+                  </div>
+                  <!--
+                  <a class="text-center" href="#">
+                    <h6>0 ITEMS ON YOUR CART</h6>
+                  </a>
+                  -->
+                </div>
+
+                <div class="quick-cart-footer clearfix">
+                  <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
+                  <span class="pull-left"><strong>TOTAL:</strong> $ {{ getTotal() }}</span>
+                </div>
+
+              </div>
+            </li>
+          </ul>
+<!-- /QUICK SHOP CART -->
+
+
 					<!-- Logo -->
 					<a class="logo pull-left" href="index.html">
 						<img src="images/logos/logochico.png" alt="" />
@@ -520,193 +513,49 @@
 	  </div>
 	</section>
 
-<!-- RECOMMENDED -->
-<section id="shop">
-<div class="container">
-<h2 class="owl-featured"><strong>Recomendados</strong> para ti:</h2>
-<div class="owl-carousel featured nomargin owl-padding-10" data-plugin-options='{"singleItem": false, "stopOnHover":false, "autoPlay":4000, "autoHeight": false, "navigation": true, "pagination": false}'>
 
-<!-- item -->
-<div class="shop-item nomargin">
-<div class="thumbnail">
-	<!-- product image(s) -->
-	<a class="shop-item-image" href="#">
-		<div class="owl-carousel owl-padding-0 nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3000, "navigation": false, "pagination": false, "transitionStyle":"fadeUp"}'>
-			<img class="img-responsive" src="images/shop/products/300x450/halogen/pr1.jpg" alt="shop first image" />
-			<img class="img-responsive" src="images/shop/products/300x450/halogen/pr2.jpg" alt="shop hover image" />
-		</div>
-	</a>
-	<!-- /product image(s) -->
-</div>
-<div class="shop-item-summary text-center">
-	<h2>Lamparas - Halogena 12V 55W H7 X-Treme Power Vision</h2>
-	<!-- price -->
-	<div class="shop-item-price">
-		$550.00
-	</div>
-	<!-- /price -->
-</div>
-<!-- buttons -->
-<div class="shop-item-buttons text-center">
-	<a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
-</div>
-<!-- /buttons -->
-</div>
-<!-- /item -->
+  <!-- RECOMMENDED -->
+  <section id="shop">
+    <div class="container">
+      <h2 class="owl-featured"><strong>Recomendados</strong> para ti:</h2>
+      <div class="owl-carousel featured nomargin owl-padding-10"
+          data-plugin-options='{
+          "singleItem": false,
+          "stopOnHover":false,
+          "autoPlay":4000,
+          "autoHeight": false,
+          "navigation": true,
+          "pagination": false
+          }'
+          ng-controller="RecomendedController as controller">
 
-<!-- item -->
-<div class="shop-item nomargin">
-<div class="thumbnail">
-	<!-- product image(s) -->
-	<a class="shop-item-image" href="#">
-		<!-- CAROUSEL -->
-		<div class="owl-carousel owl-padding-0 nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3000, "navigation": false, "pagination": false, "transitionStyle":"fadeUp"}'>
-			<img class="img-responsive" src="images/shop/products/300x450/espejo/1.jpg" alt="">
-			<img class="img-responsive" src="images/shop/products/300x450/espejo/2.jpg" alt="">
-		</div>
-		<!-- /CAROUSEL -->
-	</a>
-	<!-- /product image(s) -->
-</div>
-<div class="shop-item-summary text-center">
-	<h2>Espejo deportivo vitalone izq. base metal</h2>
-	<!-- price -->
-	<div class="shop-item-price">
-		$387.00
-	</div>
-	<!-- /price -->
-</div>
-<!-- buttons -->
-<div class="shop-item-buttons text-center">
-	<a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
-</div>
-<!-- /buttons -->
-</div>
-<!-- /item -->
+        <div class="shop-item nomargin" ng-repeat="product in recomendados">
+          <div class="thumbnail">
+            <a class="shop-item-image" href="#">
+              <div class="owl-carousel owl-padding-0 nomargin"
+                data-plugin-options='{
+                  "singleItem": true,
+                  "autoPlay": 3000,
+                  "navigation": false,
+                  "pagination": true
+                }'>
+                <img class="img-responsive" ng-src="{{product.images[0]}}" alt="shop first image" />
+              </div>
+            </a>
+          </div>
 
-<!-- item -->
-<div class="shop-item nomargin">
-<div class="thumbnail">
-	<!-- product image(s) -->
-	<a class="shop-item-image" href="#">
-		<!-- <div class="owl-carousel owl-padding-0 nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3000, "navigation": false, "pagination": false, "transitionStyle":"fadeUp"}'> -->
-			<img class="img-responsive" src="images/shop/products/300x450/limpieza/1.jpg" alt="shop first image" />
-		<!-- </div> -->
-	</a>
-	<!-- /product image(s) -->
-</div>
-<div class="shop-item-summary text-center">
-	<h2>Cera autobrillo gatillo 650CC Revigal</h2>
-	<!-- price -->
-	<div class="shop-item-price">
-		$118.10
-	</div>
-	<!-- /price -->
-</div>
-<!-- buttons -->
-<div class="shop-item-buttons text-center">
-	<a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
-</div>
-<!-- /buttons -->
-</div>
-<!-- /item -->
+          <div class="shop-item-summary text-center">
+            <h4>{{product.description}}</h4>
+            <div class="shop-item-price">$ {{product.price}}</div>
+          </div>
 
-<!-- item -->
-<div class="shop-item nomargin">
-<div class="thumbnail">
-	<!-- product image(s) -->
-	<a class="shop-item-image" href="#">
-		<!-- <div class="owl-carousel owl-padding-0 nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3000, "navigation": false, "pagination": false, "transitionStyle":"fadeUp"}'> -->
-			<img class="img-responsive" src="images/shop/products/300x450/asiento/1.jpg" alt="shop first image" />
-		<!-- </div> -->
-	</a>
-	<!-- /product image(s) -->
-</div>
-<div class="shop-item-summary text-center">
-	<h2>Cubre Asientos - Negro Gris</h2>
-	<!-- price -->
-	<div class="shop-item-price">$781.9</div>
-	<!-- /price -->
-</div>
-<!-- buttons -->
-<div class="shop-item-buttons text-center">
-	<a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
-</div>
-<!-- /buttons -->
-</div>
-<!-- /item -->
-<!-- item -->
-<div class="shop-item nomargin">
-<div class="thumbnail">
-	<!-- product image(s) -->
-	<a class="shop-item-image" href="#">
-		<!-- <div class="owl-carousel owl-padding-0 nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": false, "transitionStyle":"fadeUp"}'> -->
-			<img class="img-responsive" src="images/shop/products/300x450/halogen/4.jpg" alt="shop first image" />
-		<!-- </div> -->
-	</a>
-	<!-- /product image(s) -->
-</div>
-<div class="shop-item-summary text-center">
-	<h2>Lamparas - Halogena 12v 55w H3 Crystal Vision Kit</h2>
-	<!-- price -->
-	<div class="shop-item-price">$660.00</div>
-	<!-- /price -->
-</div>
-<!-- buttons -->
-<div class="shop-item-buttons text-center">
-	<a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
-</div>
-<!-- /buttons -->
-</div>
-<!-- /item -->
-<!-- item -->
-<div class="shop-item nomargin">
-<div class="thumbnail">
-	<!-- product image(s) -->
-	<a class="shop-item-image" href="#">
-		<img class="img-responsive" src="images/shop/products/300x450/cubreauto/1.jpg" alt="shop first image" />
-
-	</a>
-	<!-- /product image(s) -->
-</div>
-<div class="shop-item-summary text-center">
-	<h2>Cubre Autos - Cubre Camionetas Anti Granizo XXL</h2>
-	<!-- price -->
-	<div class="shop-item-price">$3320.00</div>
-	<!-- /price -->
-</div>
-<!-- buttons -->
-<div class="shop-item-buttons text-center">
-	<a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
-</div>
-<!-- /buttons -->
-</div>
-<!-- /item -->
-<!-- item -->
-<div class="shop-item nomargin">
-<div class="thumbnail">
-	<!-- product image(s) -->
-	<a class="shop-item-image" href="#">
-		<img class="img-responsive" src="images/shop/products/300x450/taza/1.jpg" alt="shop hover image" />
-	</a>
-	<!-- /product image(s) -->
-</div>
-<div class="shop-item-summary text-center">
-	<h2>Tazas De Rueda - Rodado 13 Jgo. 4 Piezas</h2>
-	<!-- price -->
-	<div class="shop-item-price">$613.00</div>
-	<!-- /price -->
-</div>
-<!-- buttons -->
-<div class="shop-item-buttons text-center">
-	<a class="btn btn-default" href="shop-cart.html"><i class="fa fa-cart-plus"></i> Agregar</a>
-</div>
-<!-- /buttons -->
-</div>
-<!-- /item -->
-</div>
-</div>
-</section>
+          <div class="shop-item-buttons text-center">
+            <a class="btn btn-default" ng-click="addToCart(product)"><i class="fa fa-cart-plus"></i> Agregar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 <section class="page-header page-header-xs parallax parallax-3" style="background-image:url('images/fondos/blackfondo.jpg')">
@@ -758,7 +607,7 @@
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 					<strong>Atencion!</strong> Los campos marcados con (*) son obligatorios!
 					</div><!-- /Alert Mandatory -->
-					<form action="php/contact.php" method="post" enctype="multipart/form-data">
+					<form action="contact.php" method="post" enctype="multipart/form-data">
 						<fieldset>
 							<input type="hidden" name="action" value="contact_send" />
 							<div class="row">
@@ -819,7 +668,7 @@
 						height-550
 						height-600
 					-->
-					<div id="map3" class="height-300"></div>
+					<div id="contactMap" class="height-300"></div>
 					<hr />
 					<!-- Contact Address -->
 					<address>
@@ -903,6 +752,8 @@
 </div>
 <!-- /PRELOADER -->
 
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="//code.angularjs.org/1.4.7/angular-cookies.min.js"></script>
 	<!-- JAVASCRIPT FILES -->
 	<script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
 	<script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
@@ -913,31 +764,11 @@
 	<script type="text/javascript" src="assets/js/view/demo.layerslider_slider.js"></script>
   <script src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="assets/plugins/gmaps.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script type="text/javascript" src="assets/js/revenga.js"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
-			/**
-				@MULTIPLE MARKERS GOOGLE MAP
-			**/
-			map3 = new GMaps({
-				div: '#map3',
-				lat: -34.8357249,
-				lng: -56.1918285
-			});
-			// Marker 1
-			map3.addMarker({
-				lat: -34.8357249,
-				lng: -56.1918285,
-				title: 'Taller Revenga',
-				click: function(e){
-					alert('Revenga Ltda.\n' +
-								'Av de las Instrucciones 1489\n' +
-								'Montevideo, Uruguay\n' +
-								'Tel: (+598) 2354 2004\n' +
-								'Cel: 099 620 522\n' +
-								'info@revenga.com.uy\n');
-				}
-			});
+			Revenga.paintMap();
 		});
 	</script>
 </body>
