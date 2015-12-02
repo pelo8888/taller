@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--[if IE 8]>      <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>      <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html ng-app="taller"> <!--<![endif]-->
+<head class="toastr-notify">
+  <meta charset="utf-8" />
+  <title>Taller Revenga</title>
+  <meta name="keywords" content="Autos, Camiones, Taller, Power Chips" />
+  <meta name="description" content="Autos, Camiones, Taller, Power Chips" />
+  <meta name="Author" content="pelo8888@gmail.com" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+    <!-- WEB FONTS : use %7C instead of | (pipe) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+    <!-- CORE CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- THEME CSS -->
+    <link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout-shop.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-cookies.min.js"></script>
+  </head>
+
+  <!--
+    AVAILABLE BODY CLASSES:
+
+    smoothscroll      = create a browser smooth scroll
+    enable-animation    = enable WOW animations
+
+    bg-grey         = grey background
+    grain-grey        = grey grain background
+    grain-blue        = blue grain background
+    grain-green       = green grain background
+    grain-blue        = blue grain background
+    grain-orange      = orange grain background
+    grain-yellow      = yellow grain background
+
+    boxed           = boxed layout
+    pattern1 ... patern11 = pattern background
+    menu-vertical-hide    = hidden, open on click
+
+    BACKGROUND IMAGE [together with .boxed class]
+    data-background="assets/images/boxed_background/1.jpg"
+  -->
+  <body class="smoothscroll enable-animation">
+
+    <!-- wrapper -->
+    <div id="wrapper">
+    <div id="header" class="sticky shadow-after-3 clearfix">
+
+      <header id="topNav">
+        <div class="container">
+          <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+          <i class="fa fa-bars"></i>
+          </button>
+
+<!-- QUICK SHOP CART -->
+          <ul class="pull-right nav nav-pills nav-second-main" ng-controller="QuickCartController">
+            <li class="quick-cart">
+
+              <a href="#">
+                <span class="badge badge-aqua btn-xs badge-corner">{{ getLength() }}</span>
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+
+              <div class="quick-cart-box">
+                <h4>Carrito de compras</h4>
+                <div class="quick-cart-wrapper">
+
+                  <div ng-repeat="product in carrito">
+                    <a href="#"><!-- cart item -->
+                    <img src="{{product.images[0]}}" width="45" height="45" alt="" />
+                    <h6><span>{{product.count}} x</span> {{product.description}}</h6>
+                    <small>${{product.price}}</small>
+                    </a>
+                  </div>
+                  <!--
+                  <a class="text-center" href="#">
+                    <h6>0 ITEMS ON YOUR CART</h6>
+                  </a>
+                  -->
+                </div>
+
+                <div class="quick-cart-footer clearfix">
+                  <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
+                  <span class="pull-left"><strong>TOTAL:</strong> $ {{ getTotal() }}</span>
+                </div>
+
+              </div>
+            </li>
+          </ul>
+<!-- /QUICK SHOP CART -->
+
+
+          <!-- Logo -->
+          <a class="logo pull-left" href="index.html">
+            <img src="images/logos/logochico.png" alt="" />
+          </a>
+
+        </div>
+  </header>
+</div>
+
+
+
+
+
+      <!-- CART -->
+      <section>
+        <div class="container" ng-controller="MyCartController as controller">
+
+          <!-- EMPTY CART -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <strong>El carrito se encuentra vacio!</strong><br />
+              No haz agregado productos a tu carrito.<br />
+              Haz click <a href="index.html">aqui</a> para seguir comprando. <br />
+              <span class="label label-warning">Sin productos para mostrar.</span>
+            </div>
+          </div>
+          <!-- /EMPTY CART -->
+
+          <!-- CART -->
+          <div class="row">
+            <div class="col-lg-9 col-sm-8">
+
+              <div class="cartContent clearfix">
+                <div id="cartContent">
+                  <!-- cart header -->
+                  <div class="item head clearfix">
+                    <span class="cart_img"></span>
+                    <span class="product_name size-13 bold">Producto</span>
+                    <span class="remove_item size-13 bold"></span>
+                    <span class="total_price size-13 bold">Total</span>
+                    <span class="qty size-13 bold">Cantidad</span>
+                  </div>
+                  <!-- /cart header -->
+
+                  <div ng-repeat="product in mycart">
+                    <!-- cart item -->
+                    <div class="item">
+                      <div class="cart_img pull-left width-100 padding-10 text-left"><img ng-src="{{product.images[0]}}" alt="" width="80" /></div>
+                      <a href="#" class="product_name">
+                        <span>{{product.description}}</span>
+                      </a>
+                      <a href="#" class="remove_item" ng-click="removeToCart(product)"><i class="fa fa-times"></i></a>
+                      <div class="total_price">$<span>{{product.price * (cantidad || product.count) }}</span></div>
+                      <div class="qty">
+                        <input type="number" ng-value="{{product.count}}" ng-model="cantidad" name="qty" maxlength="3" max="999" min="1" /> &times; ${{product.price}}
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <!-- /cart item -->
+                  </div>
+
+                  <!-- update cart -->
+                  <button class="btn btn-success margin-top-20 margin-right-10 pull-right"><i class="glyphicon glyphicon-ok" ng-click="addToCart(product)"></i> Actualizar</button>
+                  <button class="btn btn-danger margin-top-20 margin-right-10 pull-right"><i class="glyphicon glyphicon-remove"></i>Borrar todo</button>
+                  <!-- /update cart -->
+
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+              <!-- /CART -->
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="col-lg-3 col-sm-4" ng-controller="confirmController as controller">
+              <div class="toggle-transparent toggle-bordered-full clearfix">
+                <div class="toggle active">
+                  <div class="toggle-content">
+                    <span class="clearfix">
+                      <span class="pull-right size-20">${{ getTotal() }}</span>
+                      <strong class="pull-left">TOTAL:</strong>
+                    </span>
+                    <hr />
+                    <a href="#" class="btn btn-primary btn-lg btn-block size-15"><i class="fa fa-mail-forward"></i> Confirmar compra</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <!-- /CART -->
+
+        </div>
+      </section>
+      <!-- /CART -->
+
+        <!-- FOOTER -->
+  <footer id="footer" class="">
+    <div class="copyright">
+      <div class="container">
+          <ul class="pull-right nomargin list-inline mobile-block">
+          <li>Revenga Ltda</li>
+          <li>•</li>
+          <li>Tel: (+598) 2354 2004</li>
+        </ul>
+        <img src="images/logos/logochicodark.png" alt="" />
+      </div>
+    </div>
+  </footer>
+  <!-- /FOOTER -->
+    </div>
+    <!-- /wrapper -->
+
+    <!-- SCROLL TO TOP -->
+    <a href="#" id="toTop"></a>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+      <div class="inner">
+        <span class="loader"></span>
+      </div>
+    </div><!-- /PRELOADER -->
+
+    <!-- JAVASCRIPT FILES -->
+    <script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+    <script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/scripts.js"></script>
+    <script type="text/javascript" src="assets/js/revenga.js"></script>
+    <script type="text/javascript" src="assets/js/carrito.js"></script>
+
+  </body>
+</html>
