@@ -75,50 +75,39 @@
                 <h4>Carrito de compras</h4>
                 <div class="quick-cart-wrapper">
 
-                  <div ng-repeat="product in carrito">
+                  <div ng-show="carrito.length < 1">
+                    <a class="text-center" href="#">
+                      <h6>Tu carrito esta vacio</h6>
+                    </a>
+                  </div>
+
+                  <div ng-repeat="product in carrito" ng-show="carrito.length > 0">
                     <a href="#"><!-- cart item -->
                     <img src="{{product.images[0]}}" width="45" height="45" alt="" />
                     <h6><span>{{product.count}} x</span> {{product.description}}</h6>
                     <small>${{product.price}}</small>
                     </a>
                   </div>
-                  <!--
-                  <a class="text-center" href="#">
-                    <h6>0 ITEMS ON YOUR CART</h6>
-                  </a>
-                  -->
-                </div>
 
+                </div>
                 <div class="quick-cart-footer clearfix">
                   <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
                   <span class="pull-left"><strong>TOTAL:</strong> $ {{ getTotal() }}</span>
                 </div>
-
               </div>
             </li>
           </ul>
-<!-- /QUICK SHOP CART -->
-
-
-          <!-- Logo -->
           <a class="logo pull-left" href="index.html">
             <img src="images/logos/logochico.png" alt="" />
           </a>
-
         </div>
-  </header>
-</div>
+      </header>
+    </div>
 
-
-
-
-
-      <!-- CART -->
       <section>
         <div class="container" ng-controller="MyCartController as controller">
 
-          <!-- EMPTY CART -->
-          <div class="panel panel-default">
+          <div class="panel panel-default" ng-show="mycart.length < 1">
             <div class="panel-body">
               <strong>El carrito se encuentra vacio!</strong><br />
               No haz agregado productos a tu carrito.<br />
@@ -126,57 +115,64 @@
               <span class="label label-warning">Sin productos para mostrar.</span>
             </div>
           </div>
-          <!-- /EMPTY CART -->
 
-          <!-- CART -->
           <div class="row">
             <div class="col-lg-9 col-sm-8">
 
               <div class="cartContent clearfix">
                 <div id="cartContent">
-                  <!-- cart header -->
-                  <div class="item head clearfix">
+
+                  <div class="item head clearfix" ng-show="mycart.length > 0">
                     <span class="cart_img"></span>
                     <span class="product_name size-13 bold">Producto</span>
                     <span class="remove_item size-13 bold"></span>
                     <span class="total_price size-13 bold">Total</span>
                     <span class="qty size-13 bold">Cantidad</span>
                   </div>
-                  <!-- /cart header -->
 
-                  <div ng-repeat="product in mycart">
-                    <!-- cart item -->
+                  <div ng-repeat="product in mycart" ng-show="mycart.length > 0">
+
                     <div class="item">
                       <div class="cart_img pull-left width-100 padding-10 text-left"><img ng-src="{{product.images[0]}}" alt="" width="80" /></div>
                       <a href="#" class="product_name">
                         <span>{{product.description}}</span>
                       </a>
-                      <a href="#" class="remove_item" ng-click="removeToCart(product)"><i class="fa fa-times"></i></a>
+                      <a href="#"
+                        class="remove_item"
+                        ng-click="removeToCart(product)">
+                        <i class="fa fa-times"></i>
+                      </a>
                       <div class="total_price">$<span>{{product.price * (cantidad || product.count) }}</span></div>
                       <div class="qty">
-                        <input type="number" ng-value="{{product.count}}" ng-model="cantidad" name="qty" maxlength="3" max="999" min="1" /> &times; ${{product.price}}
+                        <input type="number" ng-value="{{product.count}}" ng-model="cantidad" name="qty" maxlength="3" max="999" min="1" ng-change="updateQuantity(product, cantidad)"/> &times; ${{product.price}}
                       </div>
                       <div class="clearfix"></div>
                     </div>
-                    <!-- /cart item -->
+
                   </div>
 
-                  <!-- update cart -->
-                  <button class="btn btn-success margin-top-20 margin-right-10 pull-right"><i class="glyphicon glyphicon-ok" ng-click="addToCart(product)"></i> Actualizar</button>
-                  <button class="btn btn-danger margin-top-20 margin-right-10 pull-right"><i class="glyphicon glyphicon-remove"></i>Borrar todo</button>
-                  <!-- /update cart -->
+
+                  <button class="btn btn-success margin-top-20 margin-right-10 pull-right"
+                    ng-click="updateCookies()"
+                    ng-show="mycart.length > 0">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    Actualizar</button>
+                  <button class="btn btn-danger margin-top-20 margin-right-10 pull-right"
+                    ng-click="cleanCart(mycart)"
+                    ng-show="mycart.length > 0">
+                    <i class="glyphicon glyphicon-remove"
+                    ng-show="mycart.length > 0"></i>
+                    Borrar todo</button>
+
 
                   <div class="clearfix"></div>
                 </div>
               </div>
-              <!-- /CART -->
+
             </div>
 
-
-            <!-- RIGHT -->
-
             <div class="col-lg-3 col-sm-4" ng-controller="confirmController as controller">
-              <div class="toggle-transparent toggle-bordered-full clearfix">
+              <div class="toggle-transparent toggle-bordered-full clearfix" ng-show="show()">
                 <div class="toggle active">
                   <div class="toggle-content">
                     <span class="clearfix">
@@ -188,49 +184,39 @@
                   </div>
                 </div>
               </div>
-
             </div>
-
           </div>
-          <!-- /CART -->
 
         </div>
       </section>
-      <!-- /CART -->
 
-        <!-- FOOTER -->
-  <footer id="footer" class="">
-    <div class="copyright">
-      <div class="container">
-          <ul class="pull-right nomargin list-inline mobile-block">
-          <li>Revenga Ltda</li>
-          <li>•</li>
-          <li>Tel: (+598) 2354 2004</li>
-        </ul>
-        <img src="images/logos/logochicodark.png" alt="" />
+    <footer id="footer" class="">
+      <div class="copyright">
+        <div class="container">
+            <ul class="pull-right nomargin list-inline mobile-block">
+            <li>Revenga Ltda</li>
+            <li>•</li>
+            <li>Tel: (+598) 2354 2004</li>
+          </ul>
+          <img src="images/logos/logochicodark.png" alt="" />
+        </div>
       </div>
+    </footer>
+  </div>
+
+  <a href="#" id="toTop"></a>
+  <div id="preloader">
+    <div class="inner">
+      <span class="loader"></span>
     </div>
-  </footer>
-  <!-- /FOOTER -->
-    </div>
-    <!-- /wrapper -->
+  </div>
 
-    <!-- SCROLL TO TOP -->
-    <a href="#" id="toTop"></a>
-
-    <!-- PRELOADER -->
-    <div id="preloader">
-      <div class="inner">
-        <span class="loader"></span>
-      </div>
-    </div><!-- /PRELOADER -->
-
-    <!-- JAVASCRIPT FILES -->
-    <script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
-    <script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="assets/js/scripts.js"></script>
-    <script type="text/javascript" src="assets/js/revenga.js"></script>
-    <script type="text/javascript" src="assets/js/carrito.js"></script>
+  <!-- JAVASCRIPT FILES -->
+  <script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+  <script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="assets/js/scripts.js"></script>
+  <script type="text/javascript" src="assets/js/revenga.js"></script>
+  <script type="text/javascript" src="assets/js/carrito.js"></script>
 
   </body>
 </html>

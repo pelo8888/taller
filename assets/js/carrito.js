@@ -48,18 +48,34 @@
       toastr.success('Este producto ha sido agregado a tu carrito de compras.', 'Carrito actualizado');
     };
 
-
     $scope.removeToCart = function(model) {
-
       var index = Revenga.carrito.indexOf(model);
-      Revenga.carrito.splice(index, 1);
-
-
-      $cookies.putObject('carrito', Revenga.carrito);
-
-      toastr.options.positionClass = "toast-bottom-right";
-      toastr.success('Este producto ha sido eliminado de tu carrito de compras.', 'Carrito actualizado');
+      if (confirm("Estas seguro de que quieres eliminar este producto? " + model.description)) {
+        Revenga.carrito.splice(index, 1);
+        $cookies.putObject('carrito', Revenga.carrito);
+        toastr.options.positionClass = "toast-bottom-right";
+        toastr.success('Este producto ha sido eliminado de tu carrito de compras.', 'Carrito actualizado');
+      }
     };
+
+    $scope.updateCookies = function() {
+      $cookies.putObject('carrito', Revenga.carrito);
+      toastr.options.positionClass = "toast-bottom-right";
+      toastr.success('Haz actualizado los productos en tu carrito.', 'Carrito actualizado');
+    };
+
+    $scope.updateQuantity = function(model, cant) {
+      model.count = cant;
+    };
+
+    $scope.cleanCart = function(mycart) {
+      if (confirm("Estas seguro de eliminar todo?")) {
+        Revenga.carrito = [];
+        $scope.mycart = [];
+        $cookies.putObject('carrito', Revenga.carrito);
+      }
+    };
+
   });
 
   app.controller('confirmController', function($scope, $http, $cookies) {
@@ -77,6 +93,10 @@
         total += (product.price * product.count);
       }
       return total;
+    };
+
+    $scope.show = function() {
+      return (Revenga.carrito.length > 0);
     };
   });
 

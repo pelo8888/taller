@@ -45,18 +45,19 @@
                 <h4>Carrito de compras</h4>
                 <div class="quick-cart-wrapper">
 
-                  <div ng-repeat="product in carrito">
+                  <div ng-show="carrito.length < 1">
+                    <a class="text-center" href="#">
+                      <h6>Tu carrito esta vacio</h6>
+                    </a>
+                  </div>
+                  <div ng-repeat="product in carrito" ng-show="carrito.length > 0">
                     <a href="#"><!-- cart item -->
                     <img src="{{product.images[0]}}" width="45" height="45" alt="" />
                     <h6><span>{{product.count}} x</span> {{product.description}}</h6>
                     <small>${{product.price}}</small>
                     </a>
                   </div>
-                  <!--
-                  <a class="text-center" href="#">
-                    <h6>0 ITEMS ON YOUR CART</h6>
-                  </a>
-                  -->
+
                 </div>
 
                 <div class="quick-cart-footer clearfix">
