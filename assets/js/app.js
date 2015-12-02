@@ -41,7 +41,8 @@
       Revenga.carrito = $cookies.getObject('carrito');
     }
 
-    $scope.carrito = Revenga.carrito || [];
+    Revenga.carrito = Revenga.carrito || [];
+    $scope.carrito = Revenga.carrito;
 
     $scope.getTotal = function() {
       var total = 0;

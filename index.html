@@ -18,6 +18,8 @@
 	<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.4.8/angular-cookies.min.js"></script>
 </head>
 
 <body class="smoothscroll enable-animation">
@@ -58,7 +60,7 @@
                 </div>
 
                 <div class="quick-cart-footer clearfix">
-                  <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
+                  <a href="carrito.html" class="btn btn-primary btn-xs pull-right">VER CARRO</a>
                   <span class="pull-left"><strong>TOTAL:</strong> $ {{ getTotal() }}</span>
                 </div>
 
@@ -592,64 +594,71 @@
 								contact[name][required] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
 								contact[email][required] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
 		-->
-		<!-- Alert Success -->
-		<div id="alert_success" class="alert alert-success margin-bottom-30">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<strong>Gracias!</strong> Tu mensaje se ha enviado correctamente!
-			</div><!-- /Alert Success -->
-			<!-- Alert Failed -->
+			<div id="alert_success" class="alert alert-success margin-bottom-30">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Gracias!</strong> Tu mensaje se ha enviado correctamente!
+			</div>
+
 			<div id="alert_failed" class="alert alert-danger margin-bottom-30">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<strong>[SMTP] Error!</strong> Error interno!
-				</div><!-- /Alert Failed -->
-				<!-- Alert Mandatory -->
-				<div id="alert_mandatory" class="alert alert-danger margin-bottom-30">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					<strong>Atencion!</strong> Los campos marcados con (*) son obligatorios!
-					</div><!-- /Alert Mandatory -->
-					<form action="contact.php" method="post" enctype="multipart/form-data">
-						<fieldset>
-							<input type="hidden" name="action" value="contact_send" />
-							<div class="row">
-								<div class="form-group">
-									<div class="col-md-4">
-										<label for="contact:name">Nombre *</label>
-										<input required type="text" value="" class="form-control" name="contact[name][required]" id="contact:name">
-									</div>
-									<div class="col-md-4">
-										<label for="contact:email">E-mail *</label>
-										<input required type="email" value="" class="form-control" name="contact[email][required]" id="contact:email">
-									</div>
-									<div class="col-md-4">
-										<label for="contact:phone">Telefono</label>
-										<input type="text" value="" class="form-control" name="contact[phone]" id="contact:phone">
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group">
-									<div class="col-md-8">
-										<label for="contact:subject">Asunto *</label>
-										<input required type="text" value="" class="form-control" name="contact[subject][required]" id="contact:subject">
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group">
-									<div class="col-md-12">
-										<label for="contact:message">Mensaje *</label>
-										<textarea required maxlength="10000" rows="8" class="form-control" name="contact[message]" id="contact:message"></textarea>
-									</div>
-								</div>
-							</div>
-						</fieldset>
+			</div>
+
+			<div id="alert_mandatory" class="alert alert-danger margin-bottom-30">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Atencion!</strong> Los campos marcados con (*) son obligatorios!
+			</div>
+
+			<form action="contact.php" method="post" enctype="multipart/form-data">
+					<fieldset>
+						<input type="hidden" name="action" value="contact_send" />
 						<div class="row">
-							<div class="col-md-12">
-								<button type="submit" class="btn btn-3d btn-teal"><i class="fa fa-check"></i> ENVIAR</button>
+							<div class="form-group">
+								<div class="col-md-4">
+									<label for="contact:name">Nombre *</label>
+									<input required type="text" value="" class="form-control" name="contact[name][required]" id="contact:name">
+								</div>
+
+								<div class="col-md-4">
+									<label for="contact:email">E-mail *</label>
+									<input required type="email" value="" class="form-control" name="contact[email][required]" id="contact:email">
+								</div>
+
+								<div class="col-md-4">
+									<label for="contact:phone">Telefono</label>
+									<input type="text" value="" class="form-control" name="contact[phone]" id="contact:phone">
+								</div>
 							</div>
 						</div>
-					</form>
-				</div>
+
+						<div class="row">
+							<div class="form-group">
+
+								<div class="col-md-8">
+									<label for="contact:subject">Asunto *</label>
+									<input required type="text" value="" class="form-control" name="contact[subject][required]" id="contact:subject">
+								</div>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-md-12">
+									<label for="contact:message">Mensaje *</label>
+									<textarea required maxlength="10000" rows="8" class="form-control" name="contact[message]" id="contact:message"></textarea>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+					<div class="row">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-3d btn-teal"><i class="fa fa-check"></i> ENVIAR</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
 				<!-- /FORM -->
 				<!-- INFO -->
 				<div class="col-md-4 col-sm-4">
@@ -697,49 +706,20 @@
 
 	<!-- FOOTER -->
 	<footer id="footer" class="">
-<!-- 		<div class="container">
-			<div class="row">
-				<div class="col-md-6"> -->
-					<!-- Footer Logo -->
-					<!-- <img class="footer-logo" src="images/logos/logochicodark.png" alt="" /> -->
-					<!-- Small Description -->
-<!-- 					<p>Revenga Ltda.</p>
-				</div>
- -->
-<!-- 				<div class="col-md-6">
-					<h4 class="letter-spacing-1">Novedades</h4>
-					<ul class="footer-posts list-unstyled">
-						<li>
-							<a href="#">Seminario en HALTECH en Montevideo, 30 de Abril y 1 de Mayo</a>
-							<small>29 June 2015</small>
-						</li>
-						<li>
-							<a href="#">Introducción al funcionamiento de este sistema de inyección</a>
-							<small>29 June 2015</small>
-						</li>
-						<li>
-							<a href="#">Potenciacion de Vehiculos</a>
-							<small>29 June 2015</small>
-						</li>
-					</ul>
-				</div> -->
-
-<!-- 			</div>
-		</div> -->
-				<div class="copyright">
-					<div class="container">
- 						<ul class="pull-right nomargin list-inline mobile-block">
-							<li>Revenga Ltda</li>
-							<li>•</li>
-							<li>Tel: (+598) 2354 2004</li>
-						</ul>
-						<img src="images/logos/logochicodark.png" alt="" />
-					</div>
-				</div>
-
+		<div class="copyright">
+			<div class="container">
+					<ul class="pull-right nomargin list-inline mobile-block">
+					<li>Revenga Ltda</li>
+					<li>•</li>
+					<li>Tel: (+598) 2354 2004</li>
+				</ul>
+				<img src="images/logos/logochicodark.png" alt="" />
+			</div>
+		</div>
 	</footer>
 	<!-- /FOOTER -->
 </div>
+
 <!-- /wrapper -->
 <!-- SCROLL TO TOP -->
 <a href="#" id="toTop"></a>
@@ -752,8 +732,6 @@
 </div>
 <!-- /PRELOADER -->
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-  <script src="//code.angularjs.org/1.4.7/angular-cookies.min.js"></script>
 	<!-- JAVASCRIPT FILES -->
 	<script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
 	<script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
